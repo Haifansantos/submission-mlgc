@@ -29,29 +29,33 @@ async function postPredictHandler(request, h) {
   return response;
 }
  
-async function postPredictHistoriesHandler(request, h) {
-  const allData = await getAllData();
-  
-  const formatAllData = [];
-  allData.forEach(doc => {
-      const data = doc.data();
-      formatAllData.push({
-          id: doc.id,
-          history: {
-              result: data.result,
-              createdAt: data.createdAt,
-              suggestion: data.suggestion,
-              id: doc.id
-          }
-      });
-  });
-  
-  const response = h.response({
-    status: 'success',
-    data: formatAllData
-  })
-  response.code(200);
-  return response;
+async function getPredictHistoriesHandler(request, h) {
+  try {
+    const db = new Firestore({
+      projectId: 'submissionmlgc-haifan',
+    });
+
+    const predictionsCollection = db.collection('prediction');
+    const snapshot = await predictionsCollection.get();
+    
+    const histories = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      history: doc.data()
+    }));
+
+    return h.response({ 
+      status: 'success', 
+      data: histories 
+    }).code(200);
+  } catch (error) {
+    console.error('Error fetching prediction histories:', error);
+    return h.response({
+      status: 'fail',
+      message: 'Gagal mengambil riwayat prediksi'
+    }).code(500);
+  }
 }
 
-module.exports = { postPredictHandler, postPredictHistoriesHandler };
+
+
+module.exports = { postPredictHandler, getPredictHistoriesHandler };
