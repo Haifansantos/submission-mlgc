@@ -8,7 +8,7 @@ async function getAllData() {
   console.log('Firestore initialized for retrieving all data');
 
   try {
-    const querySnapshot = await db.collection('prediction').get();
+    const querySnapshot = await db.collection('predictions').get();
 
     if (querySnapshot.empty) {
       console.log('No data found');

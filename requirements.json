@@ -1,0 +1,6 @@
+{  
+ "backend-service-url": "https://submission-mlgc-398112303546.asia-southeast2.run.app",
+ "frontend-service-url": "https://submissionmlgc-haifan.et.r.appspot.com",
+ "project-id": "isi dengan project ID Google Cloud Project Anda",
+ "bucket-name": "isi dengan nama bucket yang menyimpan model Anda"
+}

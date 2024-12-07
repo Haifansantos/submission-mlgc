@@ -4,12 +4,12 @@ async function storeData(id, data) {
   try {
     const db = new Firestore({
       projectId: 'submissionmlgc-haifan', // ID Project Google Cloud
-      databaseId: 'datasubmi',     // Nama database
+      databaseId: 'default',     // Nama database
     });
 
     console.log('Firestore initialized with database:', db.databaseId);
 
-    const predictCollection = db.collection('prediction');
+    const predictCollection = db.collection('predictions');
     await predictCollection.doc(id).set(data);
     console.log(`Data stored successfully with ID: ${id}`);
   } catch (error) {

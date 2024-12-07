@@ -14,13 +14,13 @@ async function predictClassification(model, image) {
         const confidenceScore = Math.max(...score) * 100;
  
         const label = confidenceScore <= 50 ? 'Non-cancer' : 'Cancer'; 
-        let suggestion;
- 
-        if (label === 'Cancer') {
-          suggestion = "Segera periksa ke dokter!";
-      } else {
-          suggestion = "Anda sehat!";
-      }
+let suggestion;
+
+if (label === 'Cancer') {
+  suggestion = "Segera periksa ke dokter!";
+} else {
+  suggestion = "Penyakit kanker tidak terdeteksi.";  // Perbaikan di sini
+}
       
  
         return { label, suggestion };
